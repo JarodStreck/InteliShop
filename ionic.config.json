@@ -1,5 +1,7 @@
 {
   "name": "InteliShop",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

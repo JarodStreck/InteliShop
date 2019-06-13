@@ -1,15 +1,14 @@
 export class Product{
 
-  public name: string
-  public description: string
-  public order: number
-  public isBought: boolean
+  public id :number
+  public name :string
+  public description :string
 
-  constructor(name :string,description :string,order :number,isBought :boolean){
+
+  constructor(id :number,name :string,description :string){
+    this.id = id
     this.name = name
     this.description = description
-    this.order = order
-    this.isBought = isBought
   }
 
 }

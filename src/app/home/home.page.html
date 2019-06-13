@@ -1,21 +1,27 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      {{title}}
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
-  <button type="button" name="button" (click)="initDB()">init db</button>
-  <ion-item  routerLink="/details" routerDirection="forward" *ngFor="let product of data.products">
-  {{product.name}} - {{product.description}}
-  <ion-checkbox *ngIf='product.isBought == false' checked="false"></ion-checkbox>
-
-  <ion-checkbox *ngIf='product.isBought == true' checked="true"></ion-checkbox>
-  </ion-item>
-
-
+<ion-row>
+  <ion-col style="text-align: center">
+    <ion-button (click)='golistes()'>Listes</ion-button>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col style="text-align: center">
+    <ion-button (click)='goproducts()'>Produits</ion-button>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col style="text-align: center">
+    <ion-button (click)='goshops()'>Magasins</ion-button>
+  </ion-col>
+</ion-row>
   </div>
 </ion-content>

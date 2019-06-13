@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-back-button (click)="myBackButton()"></ion-back-button>
+    <ion-title>Liste des produits</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let prod of products | async">
+    <ion-label>
+     <h2>{{ prod.name }}</h2>
+   </ion-label>
+ </ion-item>
+  <form (ngSubmit)="addProduct()">
+    <ion-input type="text" [(ngModel)]="product" name="product"></ion-input>
+    <ion-button color="primary" type="submit">Ajouter</ion-button>
+  </form>
+</ion-content>

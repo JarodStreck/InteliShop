@@ -1,17 +1,19 @@
 import {Storage} from '@ionic/storage'
 import {Product} from '../app/model/Product';
+import {Injectable} from '@angular/core'
+@Injectable()
 export class DataProvider {
 
     public storage :Storage
-    public product
+    public products
     public test = "test"
 
     init()
     {
       this.products = [
-        new Product("Gruyère","Gruyère AOP",1,true),
-        new Product("Salami","Salami en tranche",2,false),
-        new Product("Toast","Toast blé complet ",1,false)
+        new Product(1,"Gruyère","Gruyère AOP"),
+        new Product(2,"Salami","Salami en tranche"),
+        new Product(3,"Toast","Toast blé complet ")
       ]
 
       this.storage.set('products', this.products).then( ()=>{
