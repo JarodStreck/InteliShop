@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'listes', loadChildren: './listes/listes.module#ListesPageModule' },
   { path: 'products', loadChildren: './products/products.module#ProductsPageModule' },
   { path: 'shops', loadChildren: './shops/shops.module#ShopsPageModule' },
+  { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
 
 ];
 

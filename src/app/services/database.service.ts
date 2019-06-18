@@ -14,6 +14,20 @@ export class DatabaseService {
   products = new BehaviorSubject([]);
 
   constructor(private plt: Platform, private sqlitePorter: SQLitePorter, private sqlite: SQLite, private http: HttpClient) {
+    /*this.sqlite.create({
+         name: 'data.db',
+         location: 'default'
+       })
+       .then((db: SQLiteObject) => {
+         this.database = db;
+         this.database.executeSql('CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR);')
+         .then(() => console.log('Executed SQL'))
+         .catch(e => console.log(e));
+         this.loadProducts();
+         this.dbReady.next(true);
+     })
+     .catch(e => console.log(e));*/
+
       }
   getDatabaseState() {
     return this.dbReady.asObservable();
