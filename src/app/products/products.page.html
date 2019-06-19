@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-back-button (click)="myBackButton()"></ion-back-button>
+    <ion-title>Liste des produits</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div scrollY="true" id="myFixZone">
+
+    <ion-item-sliding *ngFor="let prod of products | async">
+      <ion-label>
+       <h2>{{ prod.name }}</h2>
+     </ion-label>
+   </ion-item-sliding>
+
+</div>
+<form (ngSubmit)="addProduct()">
+  <ion-item width="100%">
+     <ion-input placeholder="Nom du produit" type="text" [(ngModel)]="product" name="product"></ion-input>
+     <ion-button expand="full" size="default" style="height:50px;" shape="round" color="primary" type="submit">Ajouter</ion-button>
+
+  </ion-item>
+
+</form>
+</ion-content>
