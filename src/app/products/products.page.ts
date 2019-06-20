@@ -16,6 +16,9 @@ export class ProductsPage implements OnInit{
       this.db.getDatabaseState().subscribe(rdy=>{
         this.products = this.db.getProducts();
         console.log("Init db and get products")
+        this.products.forEach(function (value){
+          console.log(value);
+       });
       })
     }
 
@@ -24,9 +27,12 @@ export class ProductsPage implements OnInit{
       this.db.addProduct(this.product)
       .then(_ => {
         this.product = null;
-
       }) .catch(e => alert(e));
     }
+  deleteProduct(id){
+    console.log("product id before db : " + id)
+    this.db.deleteProduct(id)
+  }
 
 
 

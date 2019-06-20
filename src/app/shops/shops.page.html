@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar>
-      <ion-back-button (click)="myBackButton()"></ion-back-button>
+
     <ion-title>Liste des magasins</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item *ngFor="let shop of shopData">
+  <ion-item *ngFor="let shop of shops | async">
     <ion-label>
      <h2>{{ shop.name }}</h2>
+     <h3>{{ shop.localisation}}</h3>
+     <p>Tél : {{shop.phoneNumber}} Site Web : {{shop.website}}</p>
    </ion-label>
   </ion-item>
 </ion-content>

@@ -10,10 +10,14 @@ export class ListesPage implements OnInit {
   constructor(private router: Router){
 
   }
-  myBackButton(){
-    this.router.navigate(['home']);
+
+  createListPage(){
+    this.router.navigate(['createlist']);
   }
   ngOnInit() {
+  }
+  deleteList(id){
+    console.log("product id before db : " + id)
   }
 
 }

@@ -1,7 +1,7 @@
-import { ShopService} from '../services/shop.service';
-import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import { Observable } from 'rxjs';
-
+import {DatabaseService} from './../services/database.service';
+import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-shops',
   templateUrl: './shops.page.html',
@@ -9,16 +9,17 @@ import { Observable } from 'rxjs';
 })
 export class ShopsPage implements OnInit {
   shops: Observable<any>;
-  shopData: String;
-  constructor(private shopService: ShopService) { }
+
+  constructor(private db: DatabaseService) { }
 
   ngOnInit() {
-    this.shops = this.shopService.getShops();
-    this.shops.subscribe(shops =>{
-      this.shopData = shops.data;
-      console.log(this.shopData)
-      return this.shopData
-    }),err => console.error('Observable error :' + err)
+    this.db.getDatabaseState().subscribe(rdy=>{
+      this.shops = this.db.getShops();
+      console.log("Init db and get shops")
+      this.shops.forEach(function (value){
+        console.log(value);
+     });
+    })
   }
 
 }
