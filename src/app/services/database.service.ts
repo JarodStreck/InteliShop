@@ -22,9 +22,9 @@ export class DatabaseService {
          this.database.executeSql('CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR);')
          this.database.executeSql('CREATE TABLE IF NOT EXISTS shops (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR,localisation VARCHAR,website VARCHAR,phoneNumber INTEGER,openingHours TEXT);')
          console.log("Wtf is this not working")
-
+         this.seedShops();
          this.loadProducts();
-         this.loadShops();
+
          this.dbReady.next(true);
      });
 
@@ -32,7 +32,7 @@ export class DatabaseService {
   seedShops(){
     let data =["Migros","Chamard","www.migros.ch","022 364 22 32","Closed","Lidl","Orbe","www.lidl.ch","024 623 45 92","Closed","Migros","Orbe","www.migros.ch","022 364 22 32","Closed"]
     return this.database.executeSql('INSERT INTO shops (name,localisation,website,phoneNumber,openingHours) VALUES (?,?,?,?,?),(?,?,?,?,?),(?,?,?,?,?)', data).then(data => {
-      this.loadProducts();
+       this.loadShops();
 
     });
   }
