@@ -25,13 +25,14 @@ export class DatabaseService {
          this.seedShops();
          this.loadProducts();
 
+
          this.dbReady.next(true);
      });
 
   }
   seedShops(){
-    let data =["Migros","Chamard","www.migros.ch","022 364 22 32","Closed","Lidl","Orbe","www.lidl.ch","024 623 45 92","Closed","Migros","Orbe","www.migros.ch","022 364 22 32","Closed"]
-    return this.database.executeSql('INSERT INTO shops (name,localisation,website,phoneNumber,openingHours) VALUES (?,?,?,?,?),(?,?,?,?,?),(?,?,?,?,?)', data).then(data => {
+    let data =["Migros","Chamard","www.migros.ch",12,"Closed"]
+    return this.database.executeSql('INSERT INTO shops (name,localisation,website,phoneNumber,openingHours) VALUES (?,?,?,?,?)', data).then(data => {
        this.loadShops();
 
     });
