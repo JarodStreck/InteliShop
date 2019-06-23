@@ -6,7 +6,7 @@
 
 <ion-content>
 
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="createListPage()">
       <ion-icon size="large" name="add"></ion-icon>
     </ion-fab-button>
@@ -14,9 +14,12 @@
 
 <div scrollY="true" id="myFixZone">
   <ion-list>
-   <ion-item-sliding *ngFor="let list of lists">
-    <ion-item>
-      <ion-label>{{list.name}}</ion-label>
+   <ion-item-sliding *ngFor="let list of lists | async ">
+    <ion-item (click)="goToListDetail(list.id)">
+      <ion-label>{{list.name}} - {{list.createdAt}}</ion-label>
+      <ion-badge color="danger" *ngIf="list.state == 0" slot="end">En attente</ion-badge>
+      <ion-badge color="primary" *ngIf="list.state == 1" slot="end">En cours</ion-badge>
+      <ion-badge color="success" *ngIf="list.state == 2" slot="end">Terminée</ion-badge>
     </ion-item>
     <ion-item-options side="end">
       <ion-item-option color="danger" (click)='deleteList(list.id)'><ion-icon name="trash" size="large"></ion-icon></ion-item-option>

@@ -12,16 +12,34 @@ export class CreatelistPage implements OnInit {
   shops: Observable<any[]>;
   name;
   date;
-  productsInList;
-  shop;
-  constructor(private db: DatabaseService) {}
+  checked = [];
+  constructor(private db: DatabaseService,private router: Router) {}
 
   ngOnInit(){
-      this.db.getDatabaseState().subscribe(rdy=>{
-        this.shops = this.db.getShops();
-        this.products = this.db.getProducts();
-        console.log("Init db and get shops")
-      })
-    }
+    this.db.getDatabaseState().subscribe(rdy=>{
+      this.products = this.db.getProducts();
+    })
+  }
+  // Get value of multiple checkbox isn't something native in ionic. This function build an array of only the selected checkbox
+  buildCheckedProduct(event, checkbox : String) {
+      if(!this.checked.includes(checkbox))
+      {
+          this.checked.push(checkbox);
+      }
+      else{
+        let index = this.checked.indexOf(checkbox)
+        this.checked.splice(index,1);
+      }
+      //console.log("is check " + event.checked + "chk value " + checkbox);
+      //console.log(this.checked)
 
+  }
+
+  //Call the database function to add a new list
+  addList(){
+    this.db.addList(this.name,this.checked).then(_ => {
+      this.router.navigate(['lists']);
+    }) .catch(e => alert(e));;
+
+  }
 }
