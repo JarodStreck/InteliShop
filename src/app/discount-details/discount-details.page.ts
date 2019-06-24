@@ -41,6 +41,7 @@ export class DiscountDetailsPage implements OnInit {
          if(this.imgID == img)
          {
             this.image = { name: img, path: resPath, filePath: filePath };
+            console.log("IMAGE I CLICKED" + this.image);
             return;
          }
 
