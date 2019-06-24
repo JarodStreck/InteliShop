@@ -12,6 +12,11 @@ import {IonicStorageModule} from '@ionic/storage';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +27,12 @@ imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,IonicStorageMod
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SQLite,
-    SQLitePorter
+    SQLitePorter,
+    Camera,
+    File,
+    WebView,
+    FilePath,
+    PhotoViewer
   ],
   bootstrap: [AppComponent]
 })

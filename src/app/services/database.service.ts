@@ -21,10 +21,11 @@ export class DatabaseService {
          location: 'default'
        }).then((db: SQLiteObject) => {
          this.database = db;
-         this.database.executeSql('CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR);')
-         this.database.executeSql('CREATE TABLE IF NOT EXISTS shops(id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR,localisation VARCHAR,website VARCHAR,phoneNumber VARCHAR,openingHours TEXT);')
-         this.database.executeSql('CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR ,createdAt DATE,state INTEGER,shop_id INTEGER, FOREIGN KEY(shop_id) REFERENCES shops(id) );')
-         this.database.executeSql('create TABLE IF NOT EXISTS lists_products (id INTEGER PRIMARY KEY AUTOINCREMENT,product_id INTEGER ,list_id INTEGER,FOREIGN KEY(product_id) REFERENCES products(id),FOREIGN KEY(list_id) REFERENCES lists(id) );')
+         this.database.executeSql('CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR);').then(res => console.log('Create products')).catch(e => {console.log("Failed product " + JSON.stringify(e) )});
+         this.database.executeSql('CREATE TABLE IF NOT EXISTS shops(id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR,localisation VARCHAR,website VARCHAR,phoneNumber VARCHAR,openingHours TEXT);').then(res => console.log('Create shops')).catch(e => {console.log("Failed shops " + JSON.stringify(e) )});
+         this.database.executeSql('CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR,createdAt DATE,state INTEGER,shop_id INTEGER, FOREIGN KEY(shop_id) REFERENCES shops(id) );').then(res => console.log('Create lists')).catch(e => {console.log("Failed lists " + JSON.stringify(e) )});
+         this.database.executeSql('CREATE TABLE IF NOT EXISTS lists_products (id INTEGER PRIMARY KEY AUTOINCREMENT,product_id INTEGER ,list_id INTEGER,FOREIGN KEY(product_id) REFERENCES products(id),FOREIGN KEY(list_id) REFERENCES lists(id) );').then(res => console.log('Create product_list ')).catch(e => {console.log("Failed product_list " + JSON.stringify(e) )});
+         this.database.executeSql('CREATE TABLE IF NOT EXISTS discount (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR,imagePath VARCHAR,shop_id INTEGER,FOREIGN KEY(shop_id) REFERENCES shops(id) );').then(res => console.log('Create discount')).catch(e => {console.log("Failed discount " + JSON.stringify(e) )});
          console.log("Wtf is this not working")
          this.seedShops();
          this.loadProducts();
@@ -37,6 +38,7 @@ export class DatabaseService {
   }
   seedShops(){
     let data =["Migros","Chamard","www.migros.ch","022/364/04/28","Closed","Aldi","Orbe","www.aldi.ch","022/364/04/28","Closed"]
+
     this.database.executeSql('DELETE FROM shops ');
     return this.database.executeSql('INSERT INTO shops (name,localisation,website,phoneNumber,openingHours) VALUES (?,?,?,?,?),(?,?,?,?,?)', data).then(data => {
        this.loadShops();
@@ -156,6 +158,7 @@ loadListDetail(id){
   // Add a new list and his product. [Work in progress]
   addList(name,products){
       let data = [name,0,1]
+      console.log(data)
       return this.database.executeSql("INSERT INTO lists (name,createdAt,state,shop_id) VALUES (?,(SELECT strftime('%m/%d/%Y', 'now', 'localtime')),?,?)",data).then(data =>{
           /*products.forEach(function(element){
                this.database.executeSql("INSERT INTO lists_products (product_id,(SELECT MAX(id))) VALUES (?)",[element]).then(data =>{
